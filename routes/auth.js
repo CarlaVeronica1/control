@@ -117,6 +117,7 @@ router.post('/login', async (req, res) => {
 });
 
 //REFRESH
+/*
 router.post('/refresh', async (req, res) => {
   const { refreshToken } = req.body;
 
@@ -139,6 +140,27 @@ router.post('/refresh', async (req, res) => {
     res.status(403).json({ message: "Refresh inválido" });
   }
 });
+*/
+router.post('/refresh', (req, res) => {
+  const { refreshToken } = req.body;
 
+  if (!refreshToken) {
+    return res.status(403).json({ message: "No autorizado" });
+  }
+
+  jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET, (err, user) => {
+    if (err) {
+      return res.status(403).json({ message: "Refresh inválido" });
+    }
+
+    const newAccessToken = jwt.sign(
+      { id: user.id },
+      process.env.JWT_ACCESS_SECRET,
+      { expiresIn: '15m' }
+    );
+
+    res.json({ accessToken: newAccessToken });
+  });
+});
 
 module.exports = router;
