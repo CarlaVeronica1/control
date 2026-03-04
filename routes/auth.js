@@ -77,12 +77,12 @@ router.post('/login', async (req, res) => {
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
-
+    console.log("email "+ email+" password " + password)
     const result = await pool.query(
       'SELECT * FROM users WHERE email = $1',
       [email]
     );
-
+    console.log(result)
     if (result.rows.length === 0) {
       return res.status(400).json({ message: 'Credenciales inválidas' });
     }
@@ -97,14 +97,14 @@ router.post('/login', async (req, res) => {
 
     // 🔥 Access Token (corto)
     const accessToken = jwt.sign(
-      { id: user.id },
+      { id: user.email },
       process.env.JWT_ACCESS_SECRET,
       { expiresIn: '15m' }
     );
 
     // 🔥 Refresh Token (largo)
     const refreshToken = jwt.sign(
-      { id: user.id },
+      { id: user.email },
       process.env.JWT_REFRESH_SECRET,
       { expiresIn: '7d' }
     );
