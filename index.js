@@ -12,6 +12,7 @@ app.listen(3000, () => {
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
+const serverless = require("serverless-http");
 
 const authRoutes = require('./routes/auth');
 
@@ -25,3 +26,6 @@ app.use('/api/auth', authRoutes);
 app.listen(process.env.PORT, () => {
   console.log(`Servidor corriendo en puerto ${process.env.PORT}`);
 });
+
+//module.exports = app; 
+module.exports = serverless(app);

@@ -38,6 +38,7 @@ router.post('/register', async (req, res) => {
 
 
 // LOGIN
+/*
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -72,7 +73,48 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ message: 'Error servidor' });
   }
 });
+*/
+router.post('/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
 
+    const result = await pool.query(
+      'SELECT * FROM users WHERE email = $1',
+      [email]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(400).json({ message: 'Credenciales inválidas' });
+    }
+
+    const user = result.rows[0];
+
+    const validPassword = await bcrypt.compare(password, user.password);
+
+    if (!validPassword) {
+      return res.status(400).json({ message: 'Credenciales inválidas' });
+    }
+
+    // 🔥 Access Token (corto)
+    const accessToken = jwt.sign(
+      { id: user.id },
+      process.env.JWT_ACCESS_SECRET,
+      { expiresIn: '15m' }
+    );
+
+    // 🔥 Refresh Token (largo)
+    const refreshToken = jwt.sign(
+      { id: user.id },
+      process.env.JWT_REFRESH_SECRET,
+      { expiresIn: '7d' }
+    );
+
+    res.json({ accessToken, refreshToken });
+
+  } catch (error) {
+    res.status(500).json({ message: 'Error servidor' });
+  }
+});
 
 //REFRESH
 router.post('/refresh', async (req, res) => {
