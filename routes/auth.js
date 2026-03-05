@@ -82,8 +82,9 @@ router.post('/login', async (req, res) => {
       'SELECT * FROM users WHERE email = $1',
       [email]
     );
-    console.log(result)
+    console.log(result.rows)
     if (result.rows.length === 0) {
+        console.log("Error")
       return res.status(400).json({ message: 'Credenciales inválidas' });
     }
 
@@ -106,7 +107,7 @@ router.post('/login', async (req, res) => {
     const refreshToken = jwt.sign(
       { id: user.email },
       process.env.JWT_REFRESH_SECRET,
-      { expiresIn: '7d' }
+      { expiresIn: '1d' }
     );
 
     res.json({ accessToken, refreshToken });
