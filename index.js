@@ -20,7 +20,9 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-
+app.get('/', (req, res) => {
+  res.send('¡Hola! El servidor está funcionando correctamente.');
+});
 app.use('/api/auth', authRoutes);
 
 app.listen(process.env.PORT, () => {
