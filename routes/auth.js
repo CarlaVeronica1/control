@@ -38,7 +38,7 @@ router.post('/register', async (req, res) => {
 
 
 // LOGIN
-/*
+
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -73,7 +73,7 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ message: 'Error servidor' });
   }
 });
-*/
+/*
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -116,9 +116,9 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ message: 'Error servidor' });
   }
 });
-
+*/
 //REFRESH
-/*
+
 router.post('/refresh', async (req, res) => {
   const { refreshToken } = req.body;
 
@@ -141,7 +141,7 @@ router.post('/refresh', async (req, res) => {
     res.status(403).json({ message: "Refresh inválido" });
   }
 });
-*/
+/*
 router.post('/refresh', (req, res) => {
   const { refreshToken } = req.body;
 
@@ -163,5 +163,5 @@ router.post('/refresh', (req, res) => {
     res.json({ accessToken: newAccessToken });
   });
 });
-
+*/
 module.exports = router;
