@@ -102,14 +102,14 @@ router.post('/login', async (req, res) => {
       process.env.JWT_ACCESS_SECRET,
       { expiresIn: '15m' }
     );
-
+     console.log("accessToken"+accessToken)
     // 🔥 Refresh Token (largo)
     const refreshToken = jwt.sign(
       { id: user.email },
       process.env.JWT_REFRESH_SECRET,
       { expiresIn: '1d' }
     );
-
+    console.log("refreshToken"+refreshToken)
     res.json({ accessToken, refreshToken });
 
   } catch (error) {
