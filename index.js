@@ -25,9 +25,14 @@ app.get('/', (req, res) => {
 });
 app.use('/api/auth', authRoutes);
 
+app.get('/test', (req, res) => {
+  res.json({ message: "API funcionando" });
+});
+
+/*
 app.listen(process.env.PORT, () => {
   console.log(`Servidor corriendo en puerto ${process.env.PORT}`);
-});
+});*/
 
 //module.exports = app; 
 module.exports = serverless(app);
