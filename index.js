@@ -24,10 +24,10 @@ app.get('/', (req, res) => {
   res.send('¡Hola! El servidor está funcionando correctamente.');
 });
 app.use('/api/auth', authRoutes);
-/*
+
 app.listen(process.env.PORT, () => {
   console.log(`Servidor corriendo en puerto ${process.env.PORT}`);
-});*/
+});
 
 //module.exports = app; 
 module.exports = serverless(app);

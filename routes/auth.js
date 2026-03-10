@@ -6,7 +6,6 @@ require('dotenv').config();
 
 const router = express.Router();
 
-
 // REGISTRO
 router.post('/register', async (req, res) => {
   try {
@@ -35,7 +34,6 @@ router.post('/register', async (req, res) => {
     res.status(500).json({ message: 'Error servidor' });
   }
 });
-
 
 // LOGIN
 /*
