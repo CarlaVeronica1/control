@@ -14,7 +14,7 @@ const cors = require('cors');
 require('dotenv').config();
 const serverless = require("serverless-http");
 
-const authRoutes = require('../routes/auth');
+const authRoutes = require('./routes/auth');
 
 const app = express();
 
