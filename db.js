@@ -8,4 +8,14 @@ const pool = new Pool({
   }
 });
 
+  /*EN VERCEL.JSON
+  ,
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "index.js"
+      }
+    ]
+  */
+
 module.exports = pool;
