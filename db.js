@@ -9,13 +9,21 @@ const pool = new Pool({
 });
 
   /*EN VERCEL.JSON
-  ,
+  {
+    "version": 2,
+    "builds": [
+      {
+        "src": "index.js",
+        "use": "@vercel/node"
+      }
+    ],
     "routes": [
       {
         "src": "/(.*)",
         "dest": "index.js"
       }
     ]
+  }
   */
 
 module.exports = pool;
