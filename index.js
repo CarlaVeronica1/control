@@ -8,7 +8,7 @@ app.get('/', (req, res) => {
 app.listen(3000, () => {
   console.log('Servidor en http://localhost:3000');
 });*/
-
+/*
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
@@ -34,7 +34,20 @@ app.get('/test', (req, res) => {
 /*
 app.listen(process.env.PORT, () => {
   console.log(`Servidor corriendo en puerto ${process.env.PORT}`);
-});*/
+});
 
 //module.exports = app; 
+module.exports = serverless(app);
+*/
+const express = require("express");
+const serverless = require("serverless-http");
+
+const app = express();
+
+app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.json({ message: "API funcionando" });
+});
+
 module.exports = serverless(app);
