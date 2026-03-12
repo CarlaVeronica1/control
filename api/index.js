@@ -14,7 +14,7 @@ const cors = require('cors');
 require('dotenv').config();
 const serverless = require("serverless-http");
 
-const authRoutes = require('./routes/auth');
+const authRoutes = require('../routes/auth');
 
 const app = express();
 
@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
   res.send('¡Hola! El servidor está funcionando correctamente.');
 });
-app.use('/api/auth', authRoutes);
+app.use('/auth', authRoutes);
 
 app.get('/test', (req, res) => {
   res.json({ message: "API funcionando" });
